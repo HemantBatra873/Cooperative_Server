@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../utils/token-manager.js";
-import { COOKIE_NAME } from "../utils/constants.js";
+import { COOKIE_DOMAIN, COOKIE_NAME } from "../utils/constants.js";
 import User from "../models/user.js";
 
 export const getAllUsers = async (
@@ -36,7 +36,7 @@ export const userSignup = async (
     // create token and store cookie
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "https://agraser-frontend.vercel.app",
+      domain: COOKIE_DOMAIN,
       signed: true,
       path: "/",
     });
@@ -46,7 +46,7 @@ export const userSignup = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "https://agraser-frontend.vercel.app",
+      domain: COOKIE_DOMAIN,
       expires,
       httpOnly: true,
       signed: true,
@@ -82,7 +82,7 @@ export const userLogin = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "https://agraser-frontend.vercel.app",
+      domain: COOKIE_DOMAIN,
       signed: true,
       path: "/",
     });
@@ -92,7 +92,7 @@ export const userLogin = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "https://agraser-frontend.vercel.app",
+      domain: COOKIE_DOMAIN,
       expires,
       httpOnly: true,
       signed: true,
@@ -147,7 +147,7 @@ export const userLogout = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "https://agraser-frontend.vercel.app",
+      domain: COOKIE_DOMAIN,
       signed: true,
       path: "/",
     });
