@@ -1,7 +1,7 @@
 
-# MERN Stack AI Chatbot
+# Agraser AI Chatbot
 
-This is an AI Chatbot application, inspired by ChatGPT, by using MERN Stack and OpenAI
+This is an AI Chatbot application, inspired by Gemini, by using MERN Stack and Gemini Pro API
 
 It's a customized chatbot where each message of the user is stored in DB and can be retrieved and deleted.
 
