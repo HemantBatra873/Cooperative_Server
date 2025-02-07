@@ -33,15 +33,7 @@ export const userSignup = async (
     const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
-    // create token and store cookie
-    res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
-      domain: COOKIE_DOMAIN,
-      signed: true,
-      path: "/",
-      secure:true,
-      sameSite:'none',
-    });
+    // store cookie
 
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
@@ -84,14 +76,6 @@ export const userLogin = async (
 
     // create token and store cookie
 
-    res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
-      domain: COOKIE_DOMAIN,
-      signed: true,
-      path: "/",
-      secure:true,
-      sameSite:'none',
-    });
 
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
