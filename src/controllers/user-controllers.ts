@@ -84,14 +84,8 @@ export const userLogin = async (
 
     // create token and store cookie
 
-    res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
-      domain: COOKIE_DOMAIN,
-      signed: true,
-      path: "/",
-      secure:true,
-      sameSite:'none',
-    });
+    res.clearCookie(COOKIE_NAME, { path: "/", secure: true, sameSite: "none" });
+
 
     const token = createToken(user._id.toString(), user.email, "7d");
     const expires = new Date();
