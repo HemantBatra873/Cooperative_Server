@@ -35,7 +35,7 @@ export const generateChatCompletionGemini = async (
     const genAi = new GoogleGenerativeAI(process.env.GEMINI_SECRET);
 
     // Start a new chat session (without history)
-    const chat = genAi.getGenerativeModel({ model: "gemini-pro" }).startChat();
+    const chat = genAi.getGenerativeModel({ model: "gemini-2.0-flash-exp" }).startChat();
 
     // Send all chats with new one to Gemini
     const result = await chat.sendMessage(chats.map((chat) => chat.content));
