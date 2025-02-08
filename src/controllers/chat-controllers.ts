@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user.js";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import { geminiAiModel } from "../db/AiModelConfig.js";
 
 interface ChatMessage {
   role: "user" | "model"; 
@@ -31,14 +30,8 @@ export const generateChatCompletionGemini = async (
     chats.push({ content: message, role: "user" }); // Add user message
     user.chats.push({ content: message, role: "user" });
 
-    // Initialize GoogleGenerativeAI with retrieved key
-    const genAi = new GoogleGenerativeAI(process.env.GEMINI_SECRET);
-
-    // Start a new chat session (without history)
-    const chat = genAi.getGenerativeModel({ model: "gemini-2.0-flash-exp" }).startChat();
-
     // Send all chats with new one to Gemini
-    const result = await chat.sendMessage(chats.map((chat) => chat.content));
+    const result = await geminiAiModel.sendMessage(chats.map((chat) => chat.content));
 
     // Update user chats with response
     user.chats.push({ content: result.response.candidates[0].content.parts[0].text, role: "model" });
